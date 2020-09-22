@@ -1,6 +1,9 @@
+input.onPinPressed(TouchPin.P0, function () {
+    My_Outcome = 1
+    Calculate_Outcome()
+})
 radio.onReceivedNumber(function (receivedNumber) {
     Peer_Outcome = receivedNumber
-    My_Outcome = randint(1, 3)
     basic.showLeds(`
         . # # # .
         . # # # .
@@ -9,7 +12,7 @@ radio.onReceivedNumber(function (receivedNumber) {
         . # # # .
         `)
 })
-input.onGesture(Gesture.Shake, function () {
+function Calculate_Outcome () {
     if (Peer_Outcome == My_Outcome) {
         radio.sendString("Tie")
         basic.showString("TIE")
@@ -34,7 +37,16 @@ input.onGesture(Gesture.Shake, function () {
     } else {
     	
     }
+    My_Outcome = 0
+}
+input.onPinPressed(TouchPin.P2, function () {
+    My_Outcome = 3
+    Calculate_Outcome()
 })
-let My_Outcome = 0
+input.onPinPressed(TouchPin.P1, function () {
+    My_Outcome = 2
+    Calculate_Outcome()
+})
 let Peer_Outcome = 0
+let My_Outcome = 0
 radio.setGroup(35)
